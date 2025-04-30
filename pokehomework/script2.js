@@ -1,6 +1,6 @@
-$(document).ready(function () {
+$(document).ready(function () {//makig sure that the documet is loaded before we do aything 
 
-    const favoritePokemon = [
+    const favoritePokemon = [//giving an array of the 10 pokemoen so that it is not just the first 10 anymore 
         "gengar",
         "charizard",
         "bulbasaur",
@@ -13,7 +13,7 @@ $(document).ready(function () {
         "scizor"
     ];
 
-    function Cards(data) {
+    function Cards(data) {//same function to produce the cards as before siunce othign here changes 
         const output = document.getElementById("output");
         output.innerHTML += `
             <div class="card">
@@ -25,25 +25,25 @@ $(document).ready(function () {
             </div>`;
     }
 
-    const display = document.getElementById("poke-list");
+    const display = document.getElementById("poke-list");//this is where just the names of the pokemon will be displayed
 
-    favoritePokemon.forEach(name => {
+    favoritePokemon.forEach(name => {//for every have we woudl make tghe li and then add the name to that li then add that li to the cost display 
         const li = document.createElement("li");
         li.textContent = name;
         display.appendChild(li);
 
-        fetch(`https://pokeapi.co/api/v2/pokemon/${name}`)
+        fetch(`https://pokeapi.co/api/v2/pokemon/${name}`)//here we are mking the fetch call to get the data for the pokemon and we woudl chnage it for every ame i the array name that we made before allowing us to go through each of the epokemen and get its sdata 
             .then(response => {
                 if (!response.ok) {
-                    throw new Error('Network response was not ok ' + response.statusText);
+                    throw new Error('Network response was not ok ' + response.statusText);//makign sure that the fetch was okay 
                 }
-                return response.json();
+                return response.json();//return if the fetch was ntoto okay 
             })
             .then(pokemonData => {
-                Cards(pokemonData);
+                Cards(pokemonData);//makign thee fucntion with that specific pokemon that we are curretly allog as we go through the bnames 
             })
             .catch(error => {
-                console.error('Error fetching pokemon details:', error);
+                console.error('Error fetching pokemon details:', error);//to make sure there re any errr at all 
             });
     });
 });
